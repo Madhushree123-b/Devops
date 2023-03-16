@@ -14,22 +14,6 @@ pipeline {
             parallel {
 
 
-              pipeline {
-    agent any
-    stages {
-        stage ('Containers - Virtual environment start') {
-            steps {
-                echo 'Spinning up the containers'
-                bat 'docker-compose build'
-                bat 'docker-compose up -d'
-            }      
-        }
-        stage('MicroServices - Startup in Parallel') {
-
-
-            parallel {
-
-
                 stage('Authentication') {
                     steps {
                         dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\Authetication'){
@@ -111,3 +95,4 @@ pipeline {
             }
         }
 }
+            
