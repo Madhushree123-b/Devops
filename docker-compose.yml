@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  authentication:
+    hostname: 'User Authentication Microservice'
+    build: './Authetication'
+    ports:
+      - "4000:4000"
+  patient_registartion:
+    hostname: 'Patient Registartion Microservice'
+    build: './PatientRegistration'
+    ports:
+      - "3003:3003"
+  ward_admission:
+    hostname: 'Ward Admission Microservice'
+    build: './WardManager'
+    ports:
+      - "3002:3002"
