@@ -14,9 +14,25 @@ pipeline {
             parallel {
 
 
+              pipeline {
+    agent any
+    stages {
+        stage ('Containers - Virtual environment start') {
+            steps {
+                echo 'Spinning up the containers'
+                bat 'docker-compose build'
+                bat 'docker-compose up -d'
+            }      
+        }
+        stage('MicroServices - Startup in Parallel') {
+
+
+            parallel {
+
+
                 stage('Authentication') {
                     steps {
-                        dir('PIS\\Authetication'){
+                        dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\Authetication'){
                         echo 'Authentication starting up'
                         bat 'npm install' 
                         }
@@ -25,7 +41,7 @@ pipeline {
            
                 stage ('Patients MicroService') {
                     steps {
-                        dir('PIS\\PatientRegistration'){
+                        dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\PatientRegistration'){
                         echo 'Patients Service starting up'
                         bat 'npm install'
                         }
@@ -33,7 +49,7 @@ pipeline {
                 }
                 stage ('Ward Admissions starting up') {
                     steps {
-                        dir('PIS\\WardManager'){
+                        dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\WardManager'){
                         echo 'Staff MicroService starting up'
                         bat 'npm install'
                         }
@@ -43,7 +59,7 @@ pipeline {
         }
                 stage('Unit Testing - Chai/Mocha') {
             steps {   
-                   dir('PIS\\PatientRegistration') {
+                   dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\PatientRegistration') {
                                 script {
                                 echo 'Patient database Testing with Chai/Mocha'
                                 //bat 'npm test'
@@ -54,7 +70,7 @@ pipeline {
 
         stage('Microservice containers build') {
                 steps {
-                     dir('PIS\\PatientRegistration') {
+                     dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\PatientRegistration') {
                     script {
                     echo 'Spinning down running containers'
                     
@@ -69,7 +85,7 @@ pipeline {
 
         stage('deploy') {
             steps {
-                 dir('PIS\\PatientRegistration') {
+                 dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\PatientRegistration') {
                 script {
                 bat 'docker-compose up -d'
                 echo 'MicroServices are being deployed in Dockers'
