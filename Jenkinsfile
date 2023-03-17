@@ -43,7 +43,7 @@ pipeline {
         }
                 stage('Unit Testing - Chai/Mocha') {
             steps {   
-                   dir('\\patient_registration') {
+                   dir('PatientRegistration') {
                                 script {
                                 echo 'Patient database Testing with Chai/Mocha'
                                 //bat 'npm test'
@@ -54,7 +54,7 @@ pipeline {
 
         stage('Microservice containers build') {
                 steps {
-                     dir('\\patient_registration') {
+                     dir('PatientRegistration') {
                     script {
                     echo 'Spinning down running containers'
                     
@@ -69,7 +69,7 @@ pipeline {
 
         stage('deploy') {
             steps {
-                 dir('PIS/patient_registration') {
+                 dir('PatientRegistration') {
                 script {
                 bat 'docker-compose up -d'
                 echo 'MicroServices are being deployed in Dockers'
