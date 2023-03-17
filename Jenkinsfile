@@ -16,7 +16,7 @@ pipeline {
 
                 stage('Authentication') {
                     steps {
-                        dir('PIS\\Devops\\authentication'){
+                        dir('HMS\\Devops\\authentication'){
                         echo 'Authentication starting up'
                         bat 'npm install' 
                         }
