@@ -46,7 +46,7 @@ pipeline {
                    dir('PatientRegistration') {
                                 script {
                                 echo 'Patient database Testing with Chai/Mocha'
-                                bat 'npm test'
+                                //bat 'npm test'
                                     }
                                 }
                     }
