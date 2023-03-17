@@ -16,7 +16,7 @@ pipeline {
 
                 stage('Authentication') {
                     steps {
-                        dir('PIS/authentication'){
+                        dir('PATIENTINFORMATIONSYSTEM-MAIN\\PIS\\authentication'){
                         echo 'Authentication starting up'
                         bat 'npm install' 
                         }
