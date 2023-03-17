@@ -16,7 +16,7 @@ pipeline {
 
                 stage('Authentication') {
                     steps {
-                        dir('PIS/Authetication'){
+                        dir('PIS/authentication'){
                         echo 'Authentication starting up'
                         bat 'npm install' 
                         }
@@ -25,7 +25,7 @@ pipeline {
            
                 stage ('Patients MicroService') {
                     steps {
-                        dir('PIS/PatientRegistration'){
+                        dir('PIS/patient_registration'){
                         echo 'Patients Service starting up'
                         bat 'npm install'
                         }
@@ -33,7 +33,7 @@ pipeline {
                 }
                 stage ('Ward Admissions starting up') {
                     steps {
-                        dir('PIS/WardManager'){
+                        dir('PIS/ward_admission'){
                         echo 'Staff MicroService starting up'
                         bat 'npm install'
                         }
@@ -43,7 +43,7 @@ pipeline {
         }
                 stage('Unit Testing - Chai/Mocha') {
             steps {   
-                   dir('PIS/PatientRegistration') {
+                   dir('PIS/patient_registration') {
                                 script {
                                 echo 'Patient database Testing with Chai/Mocha'
                                 //bat 'npm test'
@@ -54,7 +54,7 @@ pipeline {
 
         stage('Microservice containers build') {
                 steps {
-                     dir('PIS/PatientRegistration') {
+                     dir('PIS/patient_registration') {
                     script {
                     echo 'Spinning down running containers'
                     
@@ -69,7 +69,7 @@ pipeline {
 
         stage('deploy') {
             steps {
-                 dir('PIS/PatientRegistration') {
+                 dir('PIS/patient_registration') {
                 script {
                 bat 'docker-compose up -d'
                 echo 'MicroServices are being deployed in Dockers'
