@@ -1,5 +1,5 @@
 {
-  "name": "patientinformtionsystem",
+  "name": "patient_registration",
   "version": "1.0.0",
   "description": "The scenario is based around a patient information system in a busy tertiary care hospital.",
   "main": "index.js",
