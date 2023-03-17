@@ -1,4 +1,13 @@
 {
+  "name": "ward_admission",
+  "version": "1.0.0",
+  "description": "The scenario is based around a patient information system in a busy tertiary care hospital.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " node sever.js"
+    
+  },
   "dependencies": {
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
