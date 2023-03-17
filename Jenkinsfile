@@ -16,7 +16,7 @@ pipeline {
 
                 stage('Authentication') {
                     steps {
-                        dir('Devops/Authetication'){
+                        dir('PIS/Authetication'){
                         echo 'Authentication starting up'
                         bat 'npm install' 
                         }
@@ -25,7 +25,7 @@ pipeline {
            
                 stage ('Patients MicroService') {
                     steps {
-                        dir('Devops/PatientRegistration'){
+                        dir('PIS/PatientRegistration'){
                         echo 'Patients Service starting up'
                         bat 'npm install'
                         }
@@ -33,7 +33,7 @@ pipeline {
                 }
                 stage ('Ward Admissions starting up') {
                     steps {
-                        dir('Devops/WardManager'){
+                        dir('PIS/WardManager'){
                         echo 'Staff MicroService starting up'
                         bat 'npm install'
                         }
@@ -43,7 +43,7 @@ pipeline {
         }
                 stage('Unit Testing - Chai/Mocha') {
             steps {   
-                   dir('Devops/PatientRegistration') {
+                   dir('PIS/PatientRegistration') {
                                 script {
                                 echo 'Patient database Testing with Chai/Mocha'
                                 //bat 'npm test'
@@ -54,7 +54,7 @@ pipeline {
 
         stage('Microservice containers build') {
                 steps {
-                     dir('Devops/PatientRegistration') {
+                     dir('PIS/PatientRegistration') {
                     script {
                     echo 'Spinning down running containers'
                     
@@ -69,7 +69,7 @@ pipeline {
 
         stage('deploy') {
             steps {
-                 dir('Devops/PatientRegistration') {
+                 dir('PIS/PatientRegistration') {
                 script {
                 bat 'docker-compose up -d'
                 echo 'MicroServices are being deployed in Dockers'
