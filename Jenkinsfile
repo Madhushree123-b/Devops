@@ -16,7 +16,7 @@ pipeline {
 
                 stage('Authentication') {
                     steps {
-                        dir('Devops\\authentication'){
+                        dir('PIS\\Devops\\authentication'){
                         echo 'Authentication starting up'
                         bat 'npm install' 
                         }
@@ -25,7 +25,7 @@ pipeline {
            
                 stage ('Patients MicroService') {
                     steps {
-                        dir('Devops\\patient_registration'){
+                        dir('PIS\\patient_registration'){
                         echo 'Patients Service starting up'
                         bat 'npm install'
                         }
@@ -33,7 +33,7 @@ pipeline {
                 }
                 stage ('Ward Admissions starting up') {
                     steps {
-                        dir('/ward_admission'){
+                        dir('PIS\\ward_admission'){
                         echo 'Staff MicroService starting up'
                         bat 'npm install'
                         }
