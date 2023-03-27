@@ -4,12 +4,11 @@
   "description": "The scenario is based around a patient information system in a busy tertiary care hospital.",
   "main": "index.js",
   "scripts": {
-    "test":"mocha index-test.js --exit",
-    "sonar":"sonar-scanner",
-    "coverage":"./node_modules/.bin/nyc -r cobertura -r text-summary -r html npm test",
-    "coverage-lcov":"./node_modules/.bin/nyc -r cobertura -r text-summary -r lcov npm test",
+    "test": "mocha index-test.js --exit",
+    "sonar": "sonar-scanner",
+    "coverage": "./node_modules/.bin/nyc -r cobertura -r text-summary -r html npm test",
+    "coverage-lcov": "./node_modules/.bin/nyc -r cobertura -r text-summary -r lcov npm test",
     "start": " node index.js"
-    
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
@@ -24,6 +23,7 @@
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",
     "chai": "^4.3.7",
-    "chai-http": "^4.3.0"
+    "chai-http": "^4.3.0",
+    "nyc": "^15.1.0"
   }
 }
