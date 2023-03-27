@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test":"mocha index-test.js --exit",
+    "sonar":"sonar-scanner",
+    "coverage":"./node_modules/.bin/nyc -r cobertura -r text-summary -r html npm test",
+    "coverage-lcov":"./node_modules/.bin/nyc -r cobertura -r text-summary -r lcov npm test",
     "start": " node index.js"
     
   },
