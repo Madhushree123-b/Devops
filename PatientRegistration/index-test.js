@@ -38,7 +38,7 @@ function generateToken(users) {
 //unit testing for registration of patient
 describe("test / route", () =>{
     it('should register a patient information', async() => {
-    chai.request('http://localhost:3003')
+    chai.request('http://localhost:6000')
         .post('/register')
         .set({"TOKEN_HEADER_KEY" : tokens})
         .send({    
