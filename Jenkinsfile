@@ -1,22 +1,7 @@
 pipeline {
     agent any
     stages{
-    stage('sonarqube analysis for Authenitication'){
-                steps{
-                    dir('Authetication'){
-                    nodejs(nodeJSInstallationName:'nodejs'){
-                        bat "npm install"
-                        withSonarQubeEnv("sonar"){
-                        bat "npm install sonar-scanner"
-                        bat "npm run sonar"
-                        }
-                    }
-                }
-            }
-            }
-            
-            
-           stage('sonarqube analysis for patient registration'){
+    stage('Security testing Using SonarQube'){
                 steps{
                     dir('PatientRegistration'){
                     nodejs(nodeJSInstallationName:'nodejs'){
@@ -29,20 +14,7 @@ pipeline {
                 }
             }
             }
-            stage('sonarqube analysis for WardManager'){
-                steps{
-                    dir('WardManager'){
-                    nodejs(nodeJSInstallationName:'nodejs'){
-                        bat "npm install"
-                        withSonarQubeEnv("sonar"){
-                        bat "npm install sonar-scanner"
-                        bat "npm run sonar"
-                        }
-                    }
-                }
-            }
-            }
-    
+       
     
         stage ('Containers starting') {
             steps {
