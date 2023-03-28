@@ -1,14 +1,57 @@
 pipeline {
     agent any
-    stages {
-        stage ('Containers - Virtual environment start') {
+    stages{
+    stage('sonarqube analysis for Authenitication'){
+                steps{
+                    dir('Authetication'){
+                    nodejs(nodeJSInstallationName:'nodejs'){
+                        bat "npm install"
+                        withSonarQubeEnv("sonar"){
+                        bat "npm install sonar-scanner"
+                        bat "npm run sonar"
+                        }
+                    }
+                }
+            }
+            }
+            
+            
+           stage('sonarqube analysis for patient registration'){
+                steps{
+                    dir('PatientRegistration'){
+                    nodejs(nodeJSInstallationName:'nodejs'){
+                        bat "npm install"
+                        withSonarQubeEnv("sonar"){
+                        bat "npm install sonar-scanner"
+                        bat "npm run sonar"
+                        }
+                    }
+                }
+            }
+            }
+            stage('sonarqube analysis for WardManager'){
+                steps{
+                    dir('WardManager'){
+                    nodejs(nodeJSInstallationName:'nodejs'){
+                        bat "npm install"
+                        withSonarQubeEnv("sonar"){
+                        bat "npm install sonar-scanner"
+                        bat "npm run sonar"
+                        }
+                    }
+                }
+            }
+            }
+    
+    
+        stage ('Containers starting') {
             steps {
                 echo 'Spinning up the containers'
                 bat 'docker-compose build'
                 bat 'docker-compose up -d'
             }      
         }
-        stage('MicroServices - Startup in Parallel') {
+        stage('MicroServices Parallel startup') {
 
 
             parallel {
@@ -23,18 +66,18 @@ pipeline {
                     }
                 }
            
-                stage ('Patients MicroService') {
+                stage ('Patient Registration') {
                     steps {
                         dir('PatientRegistration'){
-                        echo 'Patients Service starting up'
+                        echo 'Patient Registration Service starting up'
                         bat 'npm install'
                         }
                     }
                 }
-                stage ('Ward Admissions starting up') {
+                stage ('Ward Manager starting up') {
                     steps {
                         dir('WardManager'){
-                        echo 'Staff MicroService starting up'
+                        echo 'Ward manager services starting up'
                         bat 'npm install'
                         }
                     }
@@ -45,14 +88,16 @@ pipeline {
             steps {   
                    dir('PatientRegistration') {
                                 script {
-                                echo 'Patient database Testing with Chai/Mocha'
-                                //bat 'npm test'
+                                echo 'PIS Testing with Chai/Mocha'
+                                bat "npm install --save-dev mocha chai"
+                                bat "npm run test"
+                                // bat 'npm test'
                                     }
                                 }
                     }
         }             
 
-        stage('Microservice containers build') {
+        stage('Microservices containers build') {
                 steps {
                      dir('PatientRegistration') {
                     script {
@@ -79,10 +124,10 @@ pipeline {
     }
         post {
             always {
-                echo 'Pipeline fully executed.'
+                echo 'Pipeline executed.'
             }
             success {
-                echo 'All stages completed successfully.'
+                echo 'All stages completed.'
             }
             unstable {
                 echo 'Stages are inconsistent'
@@ -95,4 +140,4 @@ pipeline {
             }
         }
 }
-            
+ 
